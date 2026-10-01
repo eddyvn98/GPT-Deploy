@@ -1,0 +1,1 @@
+export async function inspectUrl(url:string){const r=await fetch(url,{redirect:"follow"});const html=await r.text();const title=html.match(/<title[^>]*>([^<]*)<\/title>/i)?.[1]?.trim()||"";return{requestedUrl:url,finalUrl:r.url,status:r.status,ok:r.ok,title,contentType:r.headers.get("content-type"),htmlSample:html.slice(0,4000)}}
