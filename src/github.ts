@@ -1,0 +1,5 @@
+import type{Env}from"./types";
+async function gh(env:Env,path:string,init:RequestInit={}){const r=await fetch(`https://api.github.com${path}`,{...init,headers:{"accept":"application/vnd.github+json","authorization":`Bearer ${env.GITHUB_TOKEN}`,"x-github-api-version":"2022-11-28","user-agent":"gpt-deploy",...(init.headers||{})}});const text=await r.text();if(!r.ok)throw new Error(`GitHub ${r.status}: ${text.slice(0,500)}`);return text?JSON.parse(text):null;}
+export async function repoInfo(env:Env,repo:string){return gh(env,`/repos/${repo}`)}
+export async function dispatchDeploy(env:Env,repo:string,branch:string){return gh(env,`/repos/${repo}/actions/workflows/gpt-deploy.yml/dispatches`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({ref:branch})})}
+export async function workflowRuns(env:Env,repo:string,branch:string){return gh(env,`/repos/${repo}/actions/workflows/gpt-deploy.yml/runs?branch=${encodeURIComponent(branch)}&per_page=5`)}
