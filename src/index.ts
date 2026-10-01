@@ -1,0 +1,2 @@
+import{Hono}from"hono";import type{Env}from"./types";import{auth}from"./auth";import{projects}from"./projects";
+const app=new Hono<{Bindings:Env}>();app.get("/",c=>c.json({name:"GPT-Deploy",version:"0.1.0",runtime:"Cloudflare Workers",status:"ok"}));app.get("/health",c=>c.json({ok:true}));app.use("/api/*",auth);app.route("/api/projects",projects);app.all("*",c=>c.json({error:"not found"},404));export default app;
