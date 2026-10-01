@@ -1,0 +1,3 @@
+import type{Env}from"./types";
+async function cf(env:Env,path:string,init:RequestInit={}){const r=await fetch(`https://api.cloudflare.com/client/v4${path}`,{...init,headers:{"authorization":`Bearer ${env.CLOUDFLARE_API_TOKEN}`,"content-type":"application/json",...(init.headers||{})}});const data:any=await r.json();if(!r.ok||data.success===false)throw new Error(`Cloudflare ${r.status}: ${JSON.stringify(data.errors||data).slice(0,700)}`);return data.result;}
+export async function workerInfo(env:Env,name:string){return cf(env,`/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/workers/services/${name}`)};

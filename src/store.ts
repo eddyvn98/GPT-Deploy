@@ -1,0 +1,4 @@
+import type{Env,Project}from"./types"; const key=(id:string)=>`project:${id}`;
+export async function getProject(env:Env,id:string){return env.STATE.get<Project>(key(id),"json");}
+export async function putProject(env:Env,p:Project){p.updatedAt=new Date().toISOString();await env.STATE.put(key(p.id),JSON.stringify(p));return p;}
+export async function listProjects(env:Env){const out:Project[]=[];let cursor:string|undefined;do{const r=await env.STATE.list({prefix:"project:",cursor});for(const k of r.keys){const p=await env.STATE.get<Project>(k.name,"json");if(p)out.push(p)}cursor=r.list_complete?undefined:r.cursor}while(cursor);return out.sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));}

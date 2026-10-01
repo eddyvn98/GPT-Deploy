@@ -1,0 +1,6 @@
+{
+  "name":"gpt-deploy","version":"0.1.1","private":true,"type":"module",
+  "scripts":{"dev":"wrangler dev","deploy":"wrangler deploy","preview":"wrangler preview","typecheck":"tsc --noEmit","test":"vitest run","check:worker":"wrangler deploy --dry-run"},
+  "dependencies":{"@modelcontextprotocol/server":"2.0.0","agents":"0.20.1","hono":"^4.9.8","jose":"^6.1.0","zod":"^4.4.3"},
+  "devDependencies":{"@cloudflare/workers-types":"5.20260930.2","typescript":"^6.0.0","vitest":"^3.2.4","wrangler":"4.145.0"}
+}

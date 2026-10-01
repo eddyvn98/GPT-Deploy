@@ -1,0 +1,1 @@
+import{describe,it,expect}from"vitest";import{inspectUrl}from"../src/browser";describe("source helpers",()=>{it("exports inspectUrl",()=>expect(typeof inspectUrl).toBe("function"))});
