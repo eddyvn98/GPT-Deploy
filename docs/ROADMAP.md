@@ -2,13 +2,15 @@
 
 ## V1 - control plane
 - [x] Worker HTTP service
-- [x] token authentication
+- [x] token authentication for REST API
 - [x] KV project registry
 - [x] GitHub repository validation
 - [x] workflow trigger and run status
 - [x] basic live URL inspection
+- [x] Streamable HTTP MCP server
+- [x] Cloudflare Access JWT validation hook for MCP
 - [x] install/architecture/product docs
-- [ ] MCP transport and tools
+- [ ] configure Cloudflare Access Managed OAuth in the deployed account
 - [ ] Browser Rendering binding and visual actions
 - [ ] deployment URL synchronization from Cloudflare/GitHub
 
