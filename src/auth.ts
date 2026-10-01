@@ -1,0 +1,2 @@
+import type {Context,Next} from "hono"; import type{Env}from"./types";
+export async function auth(c:Context<{Bindings:Env}>,next:Next){const expected=c.env.ADMIN_TOKEN;if(!expected)return c.json({error:"ADMIN_TOKEN is not configured"},500);const got=c.req.header("authorization");if(got!==`Bearer ${expected}`)return c.json({error:"unauthorized"},401);await next();}
